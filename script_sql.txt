@@ -1,0 +1,100 @@
+CREATE TABLE Responsavel(
+
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(70) NOT NULL,
+email VARCHAR(85),
+celular VARCHAR(15) NOT NULL,
+
+PRIMARY KEY (id)
+);
+
+CREATE TABLE Turma(
+
+id INT AUTO_INCREMENT NOT NULL,
+turno CHAR NOT NULL,
+nivel VARCHAR(35) NOT NULL,
+serie TINYINT NOT NULL,
+identificador CHAR NOT NULL,
+
+PRIMARY KEY (id),
+UNIQUE (turno, nivel, serie, identificador)
+);
+
+CREATE TABLE Aluno(
+
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(70) NOT NULL,
+ra INT NOT NULL,
+email VARCHAR(85) NOT NULL,
+celular VARCHAR(15) NOT NULL,
+id_responsavel INT NOT NULL,
+id_turma INT NOT NULL,
+
+PRIMARY KEY (id),
+FOREIGN KEY (id_responsavel) REFERENCES Responsavel(id),
+FOREIGN KEY (id_turma) REFERENCES Turma(id),
+UNIQUE(ra)
+);
+
+CREATE TABLE Professor(
+
+id INT AUTO_INCREMENT NOT NULL,
+nome VARCHAR(70) NOT NULL,
+email VARCHAR(85) NOT NULL,
+
+PRIMARY KEY (id)
+);
+
+CREATE TABLE Tarefa(
+
+id INT AUTO_INCREMENT NOT NULL,
+tipo VARCHAR(25) NOT NULL,
+descricao TEXT,
+data DATE NOT NULL,
+prazo DATE NOT NULL,
+id_turma INT NOT NULL,
+id_professor INT NOT NULL,
+
+PRIMARY KEY (id),
+FOREIGN KEY (id_turma) REFERENCES Turma(id),
+FOREIGN KEY (id_professor) REFERENCES Professor(id)
+);
+
+CREATE TABLE ResponsavelTarefa(
+
+id INT AUTO_INCREMENT NOT NULL,
+id_responsavel INT NOT NULL,
+id_tarefa INT NOT NULL,
+visualizado BOOLEAN NOT NULL,
+
+PRIMARY KEY (id),
+FOREIGN KEY (id_responsavel) REFERENCES Responsavel (id),
+FOREIGN KEY (id_tarefa) REFERENCES Tarefa (id),
+UNIQUE (id_responsavel, id_tarefa)
+);
+
+CREATE TABLE ProfessorTurma(
+
+id INT AUTO_INCREMENT NOT NULL,
+disciplina VARCHAR(25) NOT NULL,
+id_professor INT NOT NULL,
+id_turma INT NOT NULL,
+
+PRIMARY KEY (id),
+FOREIGN KEY (id_professor) REFERENCES Professor (id),
+FOREIGN KEY (id_turma) REFERENCES Turma (id),
+UNIQUE (id_professor, id_turma)
+);
+
+CREATE TABLE AlunoTarefa(
+
+id INT AUTO_INCREMENT NOT NULL,
+visto CHAR NOT NULL,
+id_aluno INT NOT NULL,
+id_tarefa INT NOT NULL,
+
+PRIMARY KEY (id),
+FOREIGN KEY (id_aluno) REFERENCES Aluno (id),
+FOREIGN KEY (id_tarefa) REFERENCES Tarefa (id),
+UNIQUE (id_aluno, id_tarefa)
+);
