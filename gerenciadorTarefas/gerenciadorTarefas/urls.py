@@ -20,7 +20,7 @@ from core.views import area_professor, turma
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^turma/([A-Z, a-z, 0-9]+)$', turma, name='turma'),
+    url(r'^turma/(?P<slug>[^/]+)$', turma, name='turma'),
     url(r'^turmas$', area_professor, name= 'turmas')
 
 ]
