@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gerenciador de tarefas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <link rel="stylesheet" href="css/fontawesome/web-fonts-with-css/css/fontawesome-all.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
+    </nav>
+    <div class="site-wrapper"> 
+        <h1 class="titulo-aluno">1 - Aluno Fulano de Tal da Silva</h1>
+        <div class="dados-aluno">
+            <ul>
+                <li>FEITAS: 10</li>
+                <li>INCOMPLETAS: 5</li>
+                <li>NÃO FEITAS: 2</li>
+            </ul>
+        </div>
+        <div class="grafico-aluno">
+            <canvas id="grafico" class="grafico-perfil"></canvas>
+        </div>
+
+        <div class="table-scroll"><table class="table table-hover tabela-licao" style="overflow-y:scroll">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Disciplina</th>
+                    <th>Feito</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="location.href = '#';">
+                    <td>20/03/2018</td>
+                    <td>História</td>
+                    <td><i class="far fa-smile" style="color:green"></i></td>
+                </tr>
+                <tr onclick="location.href = '#';">
+                    <td>20/03/2018</td>
+                    <td>Geografia</td>
+                    <td><i class="far fa-frown" style="color:red"></i></td>
+                </tr>
+                <tr onclick="location.href = '#';">
+                    <td>20/03/2018</td>
+                    <td>Matemática</td>
+                    <td><i class="far fa-meh" style="color:yellow"></i></td>
+                </tr>
+                <tr onclick="location.href = '#';">
+                    <td>18/03/2018</td>
+                    <td>Ciências</td>
+                    <td><i class="far fa-smile" style="color:green"></i></td>
+                </tr>
+                <tr onclick="location.href = '#';">
+                    <td>18/03/2018</td>
+                    <td>Artes</td>
+                    <td><i class="far fa-meh" style="color:yellow"></i></td>
+                </tr>
+                <tr onclick="location.href = '#';">
+                    <td>17/03/2018</td>
+                    <td>Matemática</td>
+                    <td><i class="far fa-frown" style="color:red"></i></td>
+                </tr>
+            </tbody>
+        </table></div>
+    </div>
+
+    <script>
+        var ctx = document.getElementById("grafico").getContext('2d');
+        var data = {
+            labels: ["Não fez", "Incompleta", "Feita"],
+            datasets: [{
+                data: [2, 5, 10],
+                backgroundColor: [
+                    'rgba(247, 7, 27, 0.60)',
+                    'rgba(255, 206, 1, 0.60)',
+                    'rgba(14, 209, 2, 0.60)'
+                ],
+                borderColor: [
+                    'rgba(157, 180, 204, 1)',
+                    'rgba(157, 180, 204, 1)',
+                    'rgba(157, 180, 204, 1)'
+                ],
+                borderWidth: 2
+            }]
+        }
+    
+        var options = {
+            legend : {
+                display: true
+            }
+        }
+        
+        var myPieChart = new Chart(ctx,{
+                type: 'pie',
+                data: data,
+                options: options
+            });
+    </script>
+</body>
+</html>

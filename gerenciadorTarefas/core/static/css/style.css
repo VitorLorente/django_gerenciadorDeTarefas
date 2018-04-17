@@ -1,0 +1,270 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  background-color: #333;
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  /*height: 100%; */
+  /*min-height: 100%;*/
+}
+
+.btn-entrar {
+  height: 45px;
+  width: 100%;
+  background-color: #10859c;
+}
+
+.btn-entrar:hover{
+  background-color: #23b5d3;
+}
+.form-login {
+  position: absolute;
+  top: 50px; bottom: 0;
+  left: 0; right: 0;
+  margin: auto;
+  height: 50%;
+  width: 30%;
+}
+
+ .form-group label{
+   float: left;
+ }
+
+ .menu-admin{
+   margin-left: 5%;
+   margin-right: 5%;
+   margin-top: 10px;
+   align-content: center;
+ }
+
+.menu-admin a{
+  width: 190px;
+  text-decoration: none;
+}
+
+ .menu-admin a:visited, a:active{
+   text-decoration: none;
+ }
+
+ .navbar{
+   border-bottom: 2px solid #c2b2b4;
+ }
+
+ .navbar h1{
+   color: #beb4b5;
+ }
+
+ .btn-turmas{
+   width: 170px;
+   height: 170px;
+   font-size: 340%;
+   background-color: #0e2135;
+   color: #75abbc;
+   margin-top: 7px;
+ }
+
+ .btn-alunos{
+  width: 190px;
+  height: 250px;
+  font-size: 100%;
+  background-color: #0e2135;
+  color: #75abbc;
+  margin-top: 5px;
+  white-space: normal;
+}
+
+ .btn-turmas:hover{
+   background-color: #152d46;
+   color: #1aa7c4;
+ }
+
+ .btn-alunos:hover{
+  background-color: #152d46;
+  color: #1aa7c4;
+ }
+
+ .canvas-holder{
+   width: 130%;
+   margin-top: 30%;
+ }
+
+ .titulo-aluno{
+   font-size: 60px;
+   color: #dbd4bf;
+   margin-top: 3%;
+ }
+
+ .dados-aluno{
+   float: left;
+   margin: 5%;
+   width: 40%;
+   margin-top: 7%;
+   padding-top: 50px;
+   padding-bottom: 50px;
+ }
+
+ .dados-aluno ul {
+  list-style-type: none;
+  font-size: 30px;
+  color: #e4decb;
+ }
+
+ .grafico-aluno{
+   width: 40%;
+   float: left;
+   margin-top: 7%;
+ }
+
+ .tabela-licao{
+   width: 85%;
+   margin-left: auto;
+   margin-right: auto;
+   height: 80px;
+ }
+ 
+ .tabela-licao tbody{
+  overflow-y: scroll;
+ }
+
+ .tabela-licao tr:hover td{
+   cursor: pointer;
+   background-color: #85c08b;
+ }
+
+ .titulo-tarefa{
+   font-size: 50px;
+ }
+
+ nav i{
+   margin-right: 15px;
+ }
+
+ .nav-menu{
+   float: right;
+   margin-top: 12px;
+   margin-left: 35%;
+ }
+
+ .nav-menu ul{
+   list-style-type: none;
+ }
+
+ .nav-menu ul li{
+  display: inline-block;
+  padding: 2px 10px;
+  
+ }
+
+ .calendario{
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 10px;
+  align-content: center;
+ }
+
+ .calendario a:link, a:visited{
+  text-decoration: none;
+  color: white;
+ }
+
+ .btn-evento{
+   width: 270px;
+   height: 270px;
+   float: left;
+   margin-left: 10px;
+   margin-bottom: 5px;
+   text-align: left;
+   padding: 0;
+   background-color: #0e2135;
+   color: #8bc2d3;
+ }
+
+ .btn-evento:hover{
+  background-color: #152d46;
+  color: #1aa7c4;
+ }
+
+ .btn-evento p{
+   float:left;
+   margin-left: 7px;
+   margin-top: 7px;
+   font-size: 25px;
+ }
+
+ .mes-evento p{
+   font-size: 50px;
+ }
+
+ .btn-evento ul{
+   margin-top: 20px;
+   float: left;
+   padding: 0px;
+   margin-left: 5%;
+ }
+
+ .btn-evento ul li{
+   list-style-type: none;
+ }
+
+ .detalhes-evento{
+  width: 45%;
+  height: 30%; 
+  background-color: #0e2135;
+  color: #8bc2d3;
+  float: left;
+  padding: 10px;
+  margin-left: 5%;
+  border-radius: 10px;
+  margin-top: 20px;
+ }
+
+ .descricao-evento{
+   padding: 20px;
+   color: #bbe5f1;
+ }
+
+ .form-tarefa{
+  position: absolute;
+  top: 50px; bottom: 0;
+  left: 0; right: 0;
+  margin: auto;
+  height: 50%;
+  width: 30%;
+ }
+
+ .form-tarefa div textarea{
+   width: 30%;
+ }
+
+ .btn-vistar{
+  height: 45px;
+  width: 20%;
+  background-color: #10859c;
+  color: whitesmoke;
+  margin-left: 60%;
+ }
+
+ .btn-vistar:hover{
+  background-color: #23b5d3;
+}
+
+.th-check{
+  width: 20%;
+}
+
+
+ @media (max-width: 768px) {
+  .form-login{
+    width: 70%;
+  }
+}

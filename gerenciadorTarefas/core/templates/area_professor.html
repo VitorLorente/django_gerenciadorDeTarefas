@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gerenciador de tarefas - Professor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/fontawesome/web-fonts-with-css/css/fontawesome-all.css' %}"> 
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
+            <div class="nav-menu"><ul>
+                <li>Cadastrar tarefa</li>
+                <li>Vistar tarefa</li>
+                <li>Sair</li>
+            </ul></div>
+    </nav>
+    <div class="site-wrapper"> 
+        <div class="menu-admin">
+            <h1>Olá {{ professor.nome }}!</h1>
+
+            {% for turma in turmas %}
+                <a class="btn btn-turmas" href="turma/{{ turma.slug }}">{{ turma }}</a>
+            {% endfor %}
+
+            
+        </div>
+    </div>
+</body>
+</html>

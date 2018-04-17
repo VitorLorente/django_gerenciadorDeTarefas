@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gerenciador de tarefas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/fontawesome/web-fonts-with-css/css/fontawesome-all.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+        crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
+        <div class="nav-menu"><ul>
+            <li><a href="area_professor.html">Area professor</a></li>
+            <li><a href="index.html">Sair</a></li>
+        </ul></div>
+    </nav>
+    <div class="site-wrapper">
+        <h1 style="font-size: 30px; margin-top: 15px; margin-bottom: 25px;">Selecione a tarefa: </h1>
+        <div class="table-scroll">
+            <table class="table table-hover tabela-visto" style="overflow-y:scroll">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>Nome</th>
+                        <th class="th-check">Feito</th>
+                        <th class="th-check">Não Feito</th>
+                        <th class="th-check">Incompleto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="location.href = '#';">
+                        <td class="tb-numero">1</td>
+                        <td class="tb-nome">Aluno Fulando de Tal 1</td>
+                        <td><input class="check-fez" type="checkbox" name="check-fez"></td>
+                        <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
+                        <td><input class="check-incom" type="checkbox" name="check-incom"></td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td class="tb-numero">2</td>
+                        <td class="tb-nome">Aluno Fulando de Tal 2</td>
+                        <td><input class="check-fez" type="checkbox" name="check-fez"></td>
+                        <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
+                        <td><input class="check-incom" type="checkbox" name="check-incom"></td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td class="tb-numero">3</td>
+                        <td class="tb-nome">Aluno Fulando de Tal 3</td>
+                        <td><input class="check-fez" type="checkbox" name="check-fez"></td>
+                        <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
+                        <td><input class="check-incom" type="checkbox" name="check-incom"></td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td class="tb-numero">4</td>
+                        <td class="tb-nome">Aluno Fulando de Tal 4</td>
+                        <td><input class="check-fez" type="checkbox" name="check-fez"></td>
+                        <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
+                        <td><input class="check-incom" type="checkbox" name="check-incom"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" class="btn btn-vistar">Vistar</button>
+        </div>
+        
+    </div>
+
+    <script>
+        $('input[name=check-fez').prop('checked', true);
+        var lista_vistos = new Array()
+
+        $('.btn-vistar').click(function(){
+            $('tbody tr').each(function(){
+                var visto = 'fez';
+                if($(this).find('.check-nfez').is(':checked') == true){
+                    visto = "nao fez";
+                }
+                else if($(this).find('.check-incom').is(':checked') == true){
+                    visto = "incompleto";
+                }
+                //alert(visto);
+                lista_vistos.push({
+                    "numero": $(this).find('.tb-numero').text(),
+                    "nome": $(this).find('.tb-nome').text(),
+                    "visto": visto
+                });            
+            });
+            alert(lista_vistos);
+        });
+    
+    </script>
+</body>
+</html>

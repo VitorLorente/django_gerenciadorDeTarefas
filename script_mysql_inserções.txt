@@ -19,33 +19,33 @@ VALUES('Professor 1', 'professor1@gerenciador.com'),
 ('Professor 9', 'professor9@gerenciador.com');
 
 
-INSERT INTO Turma (nivel, turno, serie, identificador)
-VALUES('Fund I', 'm', 1 , 'A'),
-('Fund I', 'm', 2 , 'B'),
-('Fund I', 'i', 1 , 'A'),
-('Fund II', 't', 6 , 'A'),
-('Fund II', 't', 6 , 'b');
+INSERT INTO Turma (nivel, turno, serie, identificador, slug)
+VALUES('Fund I', 'm', 1 , 'A', 'fi-1a-m'),
+('Fund I', 'm', 2 , 'B', 'fi-2b-m'),
+('Fund I', 'i', 1 , 'A', 'fi-1a-i'),
+('Fund II', 't', 6 , 'A', 'fii-6a-t'),
+('Fund II', 't', 6 , 'b', 'fii-6b-t');
 
 
-INSERT INTO Aluno (nome, ra, email, celular, id_responsavel, id_turma)
-VALUES('Aluno 1', 1, 'aluno1@gerenciador.com', '11999999999', 1, 1),
-('Aluno 2', 2, 'aluno2@gerenciador.com', '11999999999', 1, 2),
-('Aluno 3', 3, 'aluno3@gerenciador.com', '11999999999', 1, 3),
-('Aluno 4', 4, 'aluno4@gerenciador.com', '11999999999', 2, 4),
-('Aluno 5', 5, 'aluno5@gerenciador.com', '11999999999', 2, 5),
-('Aluno 6', 6, 'aluno6@gerenciador.com', '11999999999', 2, 1),
-('Aluno 7', 7, 'aluno7@gerenciador.com', '11999999999', 3, 2),
-('Aluno 8', 8, 'aluno8@gerenciador.com', '11999999999', 3, 3),
-('Aluno 9', 9, 'aluno9@gerenciador.com', '11999999999', 3, 4),
-('Aluno 10', 10, 'aluno10@gerenciador.com', '11999999999', 4, 5),
-('Aluno 11', 11, 'aluno11@gerenciador.com', '11999999999', 4, 1),
-('Aluno 12', 12, 'aluno12@gerenciador.com', '11999999999', 4, 2),
-('Aluno 13', 13, 'aluno13@gerenciador.com', '11999999999', 5, 3),
-('Aluno 14', 14, 'aluno14@gerenciador.com', '11999999999', 5, 4),
-('Aluno 15', 15, 'aluno15@gerenciador.com', '11999999999', 5, 5),
-('Aluno 16', 16, 'aluno16@gerenciador.com', '11999999999', 6, 1),
-('Aluno 17', 17, 'aluno17@gerenciador.com', '11999999999', 6, 2),
-('Aluno 18', 18, 'aluno18@gerenciador.com', '11999999999', 6, 3);
+INSERT INTO Aluno (nome, ra, email, celular, id_responsavel, id_turma, slug)
+VALUES('Aluno 1', 1, 'aluno1@gerenciador.com', '11999999999', 1, 1, 'aluno1'),
+('Aluno 2', 2, 'aluno2@gerenciador.com', '11999999999', 1, 2, 'aluno2'),
+('Aluno 3', 3, 'aluno3@gerenciador.com', '11999999999', 1, 3, 'aluno3'),
+('Aluno 4', 4, 'aluno4@gerenciador.com', '11999999999', 2, 4, 'aluno4'),
+('Aluno 5', 5, 'aluno5@gerenciador.com', '11999999999', 2, 5, 'aluno5'),
+('Aluno 6', 6, 'aluno6@gerenciador.com', '11999999999', 2, 1, 'aluno6'),
+('Aluno 7', 7, 'aluno7@gerenciador.com', '11999999999', 3, 2, 'aluno7'),
+('Aluno 8', 8, 'aluno8@gerenciador.com', '11999999999', 3, 3, 'aluno8'),
+('Aluno 9', 9, 'aluno9@gerenciador.com', '11999999999', 3, 4, 'aluno9'),
+('Aluno 10', 10, 'aluno10@gerenciador.com', '11999999999', 4, 5, 'aluno10'),
+('Aluno 11', 11, 'aluno11@gerenciador.com', '11999999999', 4, 1, 'aluno11'),
+('Aluno 12', 12, 'aluno12@gerenciador.com', '11999999999', 4, 2, 'aluno12'),
+('Aluno 13', 13, 'aluno13@gerenciador.com', '11999999999', 5, 3, 'aluno13'),
+('Aluno 14', 14, 'aluno14@gerenciador.com', '11999999999', 5, 4, 'aluno14'),
+('Aluno 15', 15, 'aluno15@gerenciador.com', '11999999999', 5, 5, 'aluno15'),
+('Aluno 16', 16, 'aluno16@gerenciador.com', '11999999999', 6, 1, 'aluno16'),
+('Aluno 17', 17, 'aluno17@gerenciador.com', '11999999999', 6, 2, 'aluno17'),
+('Aluno 18', 18, 'aluno18@gerenciador.com', '11999999999', 6, 3, 'aluno18');
 
 
 INSERT INTO ProfessorTurma (id_professor, id_turma, disciplina)

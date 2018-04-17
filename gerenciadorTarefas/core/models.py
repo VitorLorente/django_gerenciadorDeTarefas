@@ -8,6 +8,48 @@
 from django.db import models
 
 
+class Professor(models.Model):
+    nome = models.CharField(max_length=70)
+    email = models.CharField(max_length=85)
+
+    class Meta:
+        db_table = 'Professor'
+
+class Turma(models.Model):
+    turno = models.CharField(max_length=1)
+    nivel = models.CharField(max_length=35)
+    serie = models.IntegerField()
+    identificador = models.CharField(max_length=1)
+    slug = models.SlugField(max_length=20)
+
+    class Meta:
+        db_table = 'Turma'
+        unique_together = (('turno', 'nivel', 'serie', 'identificador'),)
+
+    def __str__(self):
+        return '{}º{}'.format(self.serie, self.identificador)
+
+class Tarefa(models.Model):
+    tipo = models.CharField(max_length=25)
+    descricao = models.TextField(blank=True, null=True)
+    data = models.DateField()
+    prazo = models.DateField()
+    id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma')
+    id_professor = models.ForeignKey(Professor, models.DO_NOTHING, db_column='id_professor')
+    slug = models.SlugField(max_length=20)
+
+    class Meta:
+        db_table = 'Tarefa'
+
+class Responsavel(models.Model):
+    nome = models.CharField(max_length=70)
+    email = models.CharField(max_length=85, blank=True, null=True)
+    celular = models.CharField(max_length=15)
+
+    class Meta:
+        db_table = 'Responsavel'
+
+
 class Aluno(models.Model):
     nome = models.CharField(max_length=70)
     ra = models.IntegerField(unique=True)
@@ -15,6 +57,7 @@ class Aluno(models.Model):
     celular = models.CharField(max_length=15)
     id_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='id_responsavel')
     id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma')
+    slug = models.SlugField(max_length=20)
 
     class Meta:
         db_table = 'Aluno'
@@ -30,14 +73,6 @@ class Alunotarefa(models.Model):
         unique_together = (('id_aluno', 'id_tarefa'),)
 
 
-class Professor(models.Model):
-    nome = models.CharField(max_length=70)
-    email = models.CharField(max_length=85)
-
-    class Meta:
-        db_table = 'Professor'
-
-
 class Professorturma(models.Model):
     disciplina = models.CharField(max_length=25)
     id_professor = models.ForeignKey(Professor, models.DO_NOTHING, db_column='id_professor')
@@ -48,15 +83,6 @@ class Professorturma(models.Model):
         unique_together = (('id_professor', 'id_turma'),)
 
 
-class Responsavel(models.Model):
-    nome = models.CharField(max_length=70)
-    email = models.CharField(max_length=85, blank=True, null=True)
-    celular = models.CharField(max_length=15)
-
-    class Meta:
-        db_table = 'Responsavel'
-
-
 class Responsaveltarefa(models.Model):
     id_responsavel = models.ForeignKey(Responsavel, models.DO_NOTHING, db_column='id_responsavel')
     id_tarefa = models.ForeignKey('Tarefa', models.DO_NOTHING, db_column='id_tarefa')
@@ -65,29 +91,6 @@ class Responsaveltarefa(models.Model):
     class Meta:
         db_table = 'ResponsavelTarefa'
         unique_together = (('id_responsavel', 'id_tarefa'),)
-
-
-class Tarefa(models.Model):
-    tipo = models.CharField(max_length=25)
-    descricao = models.TextField(blank=True, null=True)
-    data = models.DateField()
-    prazo = models.DateField()
-    id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma')
-    id_professor = models.ForeignKey(Professor, models.DO_NOTHING, db_column='id_professor')
-
-    class Meta:
-        db_table = 'Tarefa'
-
-
-class Turma(models.Model):
-    turno = models.CharField(max_length=1)
-    nivel = models.CharField(max_length=35)
-    serie = models.IntegerField()
-    identificador = models.CharField(max_length=1)
-
-    class Meta:
-        db_table = 'Turma'
-        unique_together = (('turno', 'nivel', 'serie', 'identificador'),)
 
 
 class AuthGroup(models.Model):

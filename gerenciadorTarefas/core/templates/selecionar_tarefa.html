@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Gerenciador de tarefas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/fontawesome/web-fonts-with-css/css/fontawesome-all.css"> 
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
+        <div class="nav-menu"><ul>
+            <li><a href="area_aluno.html">Home</a></li>
+            <li><a href="aluno.html">Desempenho</a></li>
+            <li><a href="index.html">Sair</a></li>
+        </ul></div>
+    </nav>
+    <div class="site-wrapper">
+        <h1 style="font-size: 30px; margin-top: 15px; margin-bottom: 25px;">Selecione a tarefa: </h1>
+        <div class="table-scroll">
+            <table class="table table-hover tabela-licao" style="overflow-y:scroll">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Prazo</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="location.href = '#';">
+                        <td>20/03/2018</td>
+                        <td>22/03/2018</td>
+                        <td><i class="fas fa-pencil-alt"></i> Lição</td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td>18/03/2018</td>
+                        <td>20/03/2018</td>
+                        <td><i class="fas fa-book"></i> Material</td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td>16/03/2018</td>
+                        <td>18/03/2018</td>
+                        <td><i class="fas fa-globe"></i> Pesquisa</td>
+                    </tr>
+                    <tr onclick="location.href = '#';">
+                        <td>14/03/2018</td>
+                        <td>18/03/2018</td>
+                        <td><i class="fas fa-file-word"></i> Trabalho</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</body>
+</html>
