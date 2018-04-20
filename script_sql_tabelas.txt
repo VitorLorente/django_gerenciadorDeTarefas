@@ -29,11 +29,13 @@ email VARCHAR(85) NOT NULL,
 celular VARCHAR(15) NOT NULL,
 id_responsavel INT NOT NULL,
 id_turma INT NOT NULL,
+numero_chamada TINYINT NOT NULL,
 
 PRIMARY KEY (id),
 FOREIGN KEY (id_responsavel) REFERENCES Responsavel(id),
 FOREIGN KEY (id_turma) REFERENCES Turma(id),
-UNIQUE(ra)
+UNIQUE(ra),
+UNIQUE(id_turma, numero_chamada)
 );
 
 CREATE TABLE Professor(
