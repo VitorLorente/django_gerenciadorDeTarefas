@@ -51,16 +51,18 @@ class Responsavel(models.Model):
 
 
 class Aluno(models.Model):
+    class Meta:
+        unique_together = ['id_turma', 'numero_chamada']
+        db_table = 'Aluno'
+    
     nome = models.CharField(max_length=70)
+    numero_chamada = models.IntegerField()
     ra = models.IntegerField(unique=True)
     email = models.CharField(max_length=85)
     celular = models.CharField(max_length=15)
     id_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='id_responsavel')
     id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma')
     slug = models.SlugField(max_length=20)
-
-    class Meta:
-        db_table = 'Aluno'
 
 
 class Alunotarefa(models.Model):

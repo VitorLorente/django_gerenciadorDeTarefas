@@ -24,7 +24,15 @@
     </nav>
     <div class="site-wrapper"> 
         <div class="menu-admin">
-            <a href="aluno.html"><div class="btn btn-alunos" href="#">
+            {% for aluno in alunos %}
+                <a href="aluno/{{ aluno.slug }}"><div class="btn btn-alunos">
+                    <p>{{ aluno.numero}} - {{ aluno.nome }}</p> 
+                    <div class="canvas-holder">
+                        <canvas id="{{ aluno.slug }}" class="grafico-perfil"></canvas>
+                    </div>
+                </div></a>
+            {% endfor %}
+            <!--<a href="aluno.html"><div class="btn btn-alunos" href="#">
                 <p>1 - Ana Maria Braga</p> 
                 <div class="canvas-holder">
                     <canvas id="grafico" class="grafico-perfil"></canvas>
@@ -119,12 +127,70 @@
                 <div class="canvas-holder">
                     <canvas id="grafico15" class="grafico-perfil"></canvas>
                 </div>
-            </div></a>
+            </div></a>-->
         </div>
     </div>
 
     <script>
-            var ctx = document.getElementById("grafico").getContext('2d');
+        var data = {
+            labels: ["Não fez", "Incompleta", "Feita"],
+            datasets: [{
+                data: [],
+                backgroundColor: [
+                    'rgba(247, 7, 27, 0.35)',
+                    'rgba(255, 206, 1, 0.35)',
+                    'rgba(14, 209, 2, 0.35)'
+                ],
+                borderColor: [
+                    'rgba(157, 180, 204,1)',
+                    'rgba(157, 180, 204, 1)',
+                    'rgba(157, 180, 204, 1)'
+                ],
+                borderWidth: 1
+            }]
+        }
+    
+        var options = {
+            layout: {
+                padding : {
+                    left: -42,
+                    right: 42
+                }
+            },
+            legend : {
+                display: false
+            },
+            devicePixelRatio : 1
+        }
+
+        var dados = jQuery.parseJSON('{{ dadosAlunos }}')
+        var ctx = []
+
+        for(var i = 0; i < dados.length; i++){
+            ctx.push([document.getElementById(dados[i]['slug']), dados[i]['slug']])
+        }
+
+        var graficos = []
+
+        for(var i = 0; i < ctx.length; i++){
+            for(var j = 0; j < dados.length; j++){
+                var dados_aluno = data
+                if(ctx[i][1] == dados[j]['slug']){
+                    dados_aluno.datasets[0].data[0] = dados[j]['naoFeitas']
+                    dados_aluno.datasets[0].data[1] = dados[j]['incompletas']
+                    dados_aluno.datasets[0].data[2] = dados[j]['feitas']
+                }
+            }
+            var myPieChart = new Chart(ctx[i][0],{
+                type: 'pie',
+                data: dados_aluno,
+                options: options
+            });
+        }
+
+
+
+            /*var ctx = document.getElementById("grafico").getContext('2d');
             var ctx1 = document.getElementById("grafico1").getContext('2d');
             var ctx2 = document.getElementById("grafico2").getContext('2d');
             var ctx3 = document.getElementById("grafico3").getContext('2d');
@@ -250,7 +316,7 @@
                 type: 'pie',
                 data: data,
                 options: options
-            });
+            });*/
         </script>
 </body>
 </html>
