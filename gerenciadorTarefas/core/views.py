@@ -99,9 +99,12 @@ def aluno(request, slug):
     tarefasTurma = len(Tarefa.objects.filter(id_turma=aluno.id_turma.id))
     tarefasAluno = simplejson.dumps(alunoAux.porcentagem(tarefasTurma))
 
+
+
     context = {
         'aluno': alunoAux,
-        'tarefas': tarefasAluno                
+        'dadosTarefas': tarefasAluno,
+        'tarefas': tarefas_aluno
     }
 
     return render(request, "aluno.html", context)

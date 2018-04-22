@@ -34,17 +34,27 @@
             <thead>
                 <tr>
                     <th>Data</th>
-                    <th>Disciplina</th>
+                    <th>Prazo</th>
+                    <th>Professor</th>
                     <th>Feito</th>
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="location.href = '#';">
-                    <td>20/03/2018</td>
-                    <td>História</td>
-                    <td><i class="far fa-smile" style="color:green"></i></td>
-                </tr>
-                <tr onclick="location.href = '#';">
+                {% for tarefa in tarefas %}
+                    <tr onclick="location.href = '#';">
+                        <td>{{ tarefa.id_tarefa.data }}</td>
+                        <td>{{ tarefa.id_tarefa.prazo }}</td>
+                        <td>{{ tarefa.id_tarefa.id_professor.nome }} </td>
+                        {% if tarefa.visto == 'n' %}
+                            <td><i class="far fa-frown" style="color:red"></i></td>
+                        {% elif tarefa.visto == 'f' %}
+                            <td><i class="far fa-smile" style="color:green"></i></td>
+                        {% else %}
+                            <td><i class="far fa-meh" style="color:yellow"></i></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                <!--<tr onclick="location.href = '#';">
                     <td>20/03/2018</td>
                     <td>Geografia</td>
                     <td><i class="far fa-frown" style="color:red"></i></td>
@@ -68,13 +78,13 @@
                     <td>17/03/2018</td>
                     <td>Matemática</td>
                     <td><i class="far fa-frown" style="color:red"></i></td>
-                </tr>
+                </tr>-->
             </tbody>
         </table></div>
     </div>
 
     <script>
-        var dados = JSON.parse('{{ tarefas|safe }}')
+        var dados = JSON.parse('{{ dadosTarefas|safe }}')
         var ctx = document.getElementById("grafico").getContext('2d');
         var data = {
             labels: ["Não fez", "Incompleta", "Feita"],
