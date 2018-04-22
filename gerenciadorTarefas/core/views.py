@@ -78,3 +78,30 @@ def turma(request, slug):
     }    
 
     return render(request, "turma.html", context)
+
+def aluno(request, slug):
+
+    aluno = Aluno.objects.get(slug=slug)
+    tarefas_aluno = Alunotarefa.objects.filter(id_aluno = aluno.id)
+    feitas = 0
+    nFeitas = 0
+    incom = 0
+
+    for tarefa in tarefas_aluno:
+        if tarefa.visto == 'f':
+            feitas += 1
+        elif tarefa.visto == 'n':
+            nFeitas += 1
+        else:
+            incom += 1
+
+    alunoAux = AlunoAux(aluno.nome, aluno.numero_chamada, feitas, nFeitas, incom, aluno.slug)
+    tarefasTurma = len(Tarefa.objects.filter(id_turma=aluno.id_turma.id))
+    tarefasAluno = simplejson.dumps(alunoAux.porcentagem(tarefasTurma))
+
+    context = {
+        'aluno': alunoAux,
+        'tarefas': tarefasAluno                
+    }
+
+    return render(request, "aluno.html", context)

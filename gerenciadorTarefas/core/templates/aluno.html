@@ -1,28 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Gerenciador de tarefas</title>
+    <title>Gerenciador de tarefas - Professor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/fontawesome/web-fonts-with-css/css/fontawesome-all.css' %}"> 
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <link rel="stylesheet" href="css/fontawesome/web-fonts-with-css/css/fontawesome-all.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
     </nav>
     <div class="site-wrapper"> 
-        <h1 class="titulo-aluno">1 - Aluno Fulano de Tal da Silva</h1>
+        <h1 class="titulo-aluno">{{ aluno.numero }} - {{ aluno.nome }}</h1>
         <div class="dados-aluno">
             <ul>
-                <li>FEITAS: 10</li>
-                <li>INCOMPLETAS: 5</li>
-                <li>NÃO FEITAS: 2</li>
+                <li>FEITAS: {{ aluno.feitas }}</li>
+                <li>INCOMPLETAS: {{ aluno.incompletas }}</li>
+                <li>NÃO FEITAS: {{ aluno.nfeitas }} </li>
             </ul>
         </div>
         <div class="grafico-aluno">
@@ -73,11 +74,12 @@
     </div>
 
     <script>
+        var dados = JSON.parse('{{ tarefas|safe }}')
         var ctx = document.getElementById("grafico").getContext('2d');
         var data = {
             labels: ["Não fez", "Incompleta", "Feita"],
             datasets: [{
-                data: [2, 5, 10],
+                data: [dados.naoFeitas, dados.incompletas, dados.feitas],
                 backgroundColor: [
                     'rgba(247, 7, 27, 0.60)',
                     'rgba(255, 206, 1, 0.60)',
