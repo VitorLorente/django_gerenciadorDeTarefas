@@ -132,7 +132,7 @@
     </div>
 
     <script>
-        var data = {
+        var data_grafico = {
             labels: ["Não fez", "Incompleta", "Feita"],
             datasets: [{
                 data: [],
@@ -163,160 +163,47 @@
             devicePixelRatio : 1
         }
 
-        var dados = jQuery.parseJSON('{{ dadosAlunos }}')
+        var dados = JSON.parse('{{ dadosAlunos|safe }}')
         var ctx = []
 
         for(var i = 0; i < dados.length; i++){
-            ctx.push([document.getElementById(dados[i]['slug']), dados[i]['slug']])
+            ctx.push({
+                "slug": dados[i].slug, 
+                "canvas": document.getElementById(dados[i].slug)
+            })
         }
 
         var graficos = []
 
         for(var i = 0; i < ctx.length; i++){
             for(var j = 0; j < dados.length; j++){
-                var dados_aluno = data
-                if(ctx[i][1] == dados[j]['slug']){
-                    dados_aluno.datasets[0].data[0] = dados[j]['naoFeitas']
-                    dados_aluno.datasets[0].data[1] = dados[j]['incompletas']
-                    dados_aluno.datasets[0].data[2] = dados[j]['feitas']
+                if(ctx[i].slug == dados[j].slug){
+                    graficos.push(new Chart(ctx[i].canvas, {
+                        type: 'pie',
+                        data : {
+                            labels: ["Não fez", "Incompleta", "Feita"],
+                            datasets: [{
+                                data: [dados[j].naoFeitas, dados[j].incompletas, dados[j].feitas],
+                                backgroundColor: [
+                                    'rgba(247, 7, 27, 0.35)',
+                                    'rgba(255, 206, 1, 0.35)',
+                                    'rgba(14, 209, 2, 0.35)'
+                                ],
+                                borderColor: [
+                                    'rgba(157, 180, 204,1)',
+                                    'rgba(157, 180, 204, 1)',
+                                    'rgba(157, 180, 204, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: options
+                    }));
+                    
+                }
                 }
             }
-            var myPieChart = new Chart(ctx[i][0],{
-                type: 'pie',
-                data: dados_aluno,
-                options: options
-            });
-        }
-
-
-
-            /*var ctx = document.getElementById("grafico").getContext('2d');
-            var ctx1 = document.getElementById("grafico1").getContext('2d');
-            var ctx2 = document.getElementById("grafico2").getContext('2d');
-            var ctx3 = document.getElementById("grafico3").getContext('2d');
-            var ctx4 = document.getElementById("grafico4").getContext('2d');
-            var ctx5 = document.getElementById("grafico5").getContext('2d');
-            var ctx6 = document.getElementById("grafico6").getContext('2d');
-            var ctx7 = document.getElementById("grafico7").getContext('2d');
-            var ctx8 = document.getElementById("grafico8").getContext('2d');
-            var ctx9 = document.getElementById("grafico9").getContext('2d');
-            var ctx10 = document.getElementById("grafico10").getContext('2d');
-            var ctx11 = document.getElementById("grafico11").getContext('2d');
-            var ctx12 = document.getElementById("grafico12").getContext('2d');
-            var ctx13 = document.getElementById("grafico13").getContext('2d');
-            var ctx14 = document.getElementById("grafico14").getContext('2d');
-            var ctx15 = document.getElementById("grafico15").getContext('2d');
-            var data = {
-                labels: ["Não fez", "Incompleta", "Feita"],
-                datasets: [{
-                    data: [12, 19, 15],
-                    backgroundColor: [
-                        'rgba(247, 7, 27, 0.35)',
-                        'rgba(255, 206, 1, 0.35)',
-                        'rgba(14, 209, 2, 0.35)'
-                    ],
-                    borderColor: [
-                        'rgba(157, 180, 204,1)',
-                        'rgba(157, 180, 204, 1)',
-                        'rgba(157, 180, 204, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            }
-    
-            var options = {
-                    layout: {
-                        padding : {
-                            left: -42,
-                            right: 42
-                        }
-                    },
-                    legend : {
-                        display: false
-                    },
-                    devicePixelRatio : 1
-                }
-    
-            var myPieChart = new Chart(ctx,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx1,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx2,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx3,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx4,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx5,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx6,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx7,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx8,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx9,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx10,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx11,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx12,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx13,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx14,{
-                type: 'pie',
-                data: data,
-                options: options
-            });
-            var myPieChart = new Chart(ctx15,{
-                type: 'pie',
-                data: data,
-                options: options
-            });*/
+            
         </script>
 </body>
 </html>

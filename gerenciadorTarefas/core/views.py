@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from core.models import *
-import json
+import simplejson
 
 # Create your views here.
 
@@ -16,9 +16,14 @@ class AlunoAux:
         fporcem = (self.feitas * 100)/total
         nfporcem = (self.nfeitas * 100)/total
         inporcem = (self.incompletas *100)/total
+        slugId = self.slug
 
-        return {'slug':self.slug, 'feitas':fporcem, 'naoFeitas':nfporcem, 'incompletas':inporcem}        
-        
+        return {
+            "slug": self.slug,
+            "feitas": self.feitas,
+            "naoFeitas": self.nfeitas,
+            "incompletas": self.incompletas
+        }
 
 def area_professor(request):
 
@@ -45,11 +50,8 @@ def turma(request, slug):
     alunosAux = []
     dadosAlunos = []
     tarefas = Alunotarefa.objects.all()
-    tarefas_turma = []
+    tarefas_turma = Tarefa.objects.filter(id_turma = turma.id)
 
-    for tarefa in tarefas:
-        if tarefa.id_aluno.id_turma.id == turma.id:
-            tarefas_turma.append(tarefa)
     for aluno in alunos_turma:
         tarefas_aluno = Alunotarefa.objects.filter(id_aluno = aluno.id)
         feitas = 0
@@ -69,7 +71,7 @@ def turma(request, slug):
     for aluno in alunosAux:
         dadosAlunos.append(aluno.porcentagem(len(tarefas_turma)))    
     
-    dados_tarefa = json.dumps(dadosAlunos)
+    dados_tarefa = simplejson.dumps(dadosAlunos)
     context = {
         'alunos':alunosAux,
         'dadosAlunos': dados_tarefa
