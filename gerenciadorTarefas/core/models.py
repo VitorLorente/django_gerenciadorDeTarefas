@@ -52,7 +52,7 @@ class Responsavel(models.Model):
 
 class Aluno(models.Model):
     class Meta:
-        unique_together = ['id_turma', 'numero_chamada']
+        unique_together = (('id_turma', 'numero_chamada'),)
         db_table = 'Aluno'
     
     nome = models.CharField(max_length=70)
@@ -67,7 +67,7 @@ class Aluno(models.Model):
 
 class Alunotarefa(models.Model):
     visto = models.CharField(max_length=1)
-    id_aluno = models.ForeignKey(Aluno, models.DO_NOTHING, db_column='id_aluno')
+    id_aluno = models.ForeignKey('Aluno', models.DO_NOTHING, db_column='id_aluno')
     id_tarefa = models.ForeignKey('Tarefa', models.DO_NOTHING, db_column='id_tarefa')
 
     class Meta:

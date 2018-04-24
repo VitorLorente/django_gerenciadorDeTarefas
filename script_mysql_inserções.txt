@@ -28,7 +28,7 @@ VALUES('Fund I', 'm', 1 , 'A', 'fi-1a-m'),
 
 
 INSERT INTO Aluno (nome, numero_chamada, ra, email, celular, id_responsavel, id_turma, slug)
-VALUES('Aluno 1', 1, 1, 'aluno1@gerenciador.com', '11999999999', 1, 1, 'aluno1'),
+VALUES('Aluno 1', 8, 1, 'aluno1@gerenciador.com', '11999999999', 1, 1, 'aluno1'),
 ('Aluno 2', 1, 2, 'aluno2@gerenciador.com', '11999999999', 1, 1, 'aluno2'),
 ('Aluno 3', 2, 3, 'aluno3@gerenciador.com', '11999999999', 1, 1, 'aluno3'),
 ('Aluno 4', 3, 4, 'aluno4@gerenciador.com', '11999999999', 1, 1, 'aluno4'),

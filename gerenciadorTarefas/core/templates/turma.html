@@ -23,6 +23,7 @@
         </ul></div>
     </nav>
     <div class="site-wrapper"> 
+        <h1 class="titulo-aluno">{{ turma }}</h1>
         <div class="menu-admin">
             {% for aluno in alunos %}
                 <a href="aluno/{{ aluno.slug }}"><div class="btn btn-alunos">

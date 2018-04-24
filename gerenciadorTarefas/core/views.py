@@ -74,7 +74,8 @@ def turma(request, slug):
     dados_tarefa = simplejson.dumps(dadosAlunos)
     context = {
         'alunos':alunosAux,
-        'dadosAlunos': dados_tarefa
+        'dadosAlunos': dados_tarefa,
+        'turma' : turma
     }    
 
     return render(request, "turma.html", context)
