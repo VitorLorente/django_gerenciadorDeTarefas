@@ -66,7 +66,7 @@ class Aluno(models.Model):
 
 
 class Alunotarefa(models.Model):
-    visto = models.CharField(max_length=1)
+    visto = models.CharField(max_length=1, blank=True, null=True)
     id_aluno = models.ForeignKey('Aluno', models.DO_NOTHING, db_column='id_aluno')
     id_tarefa = models.ForeignKey('Tarefa', models.DO_NOTHING, db_column='id_tarefa')
 

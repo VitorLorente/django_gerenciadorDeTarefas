@@ -16,12 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from core.views import area_professor, turma, aluno
+from core.views import area_professor, turma, aluno, vistar_tarefa
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^turma/(?P<slug>[^/]+)$', turma, name='turma'),
     url(r'^turmas$', area_professor, name= 'turmas'),
-    url(r'^turma/aluno/(?P<slug>[^/]+)$', aluno, name='aluno')
+    url(r'^turma/aluno/(?P<slug>[^/]+)$', aluno, name='aluno'),
+    url(r'^vistar/', vistar_tarefa, name='visto')
 
 ]

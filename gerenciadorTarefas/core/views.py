@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from core.models import *
-import simplejson
+import simplejson, json
 
 # Create your views here.
 
@@ -16,13 +16,12 @@ class AlunoAux:
         fporcem = (self.feitas * 100)/total
         nfporcem = (self.nfeitas * 100)/total
         inporcem = (self.incompletas *100)/total
-        slugId = self.slug
 
         return {
             "slug": self.slug,
-            "feitas": self.feitas,
-            "naoFeitas": self.nfeitas,
-            "incompletas": self.incompletas
+            "feitas": ('%.1f' %fporcem),
+            "naoFeitas": ('%.1f' %nfporcem),
+            "incompletas": ('%.1f' %inporcem)
         }
 
 def area_professor(request):
@@ -109,3 +108,11 @@ def aluno(request, slug):
     }
 
     return render(request, "aluno.html", context)
+
+def vistar_tarefa(request):
+    if request.is_ajax():
+        if request.POST:
+            vistos = request.body
+            
+            
+    return render(request, "vistar_tarefa.html")

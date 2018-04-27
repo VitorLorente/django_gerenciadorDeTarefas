@@ -36,7 +36,7 @@
                     <th>Data</th>
                     <th>Prazo</th>
                     <th>Professor</th>
-                    <th>Feito</th>
+                    <th>Visto</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,11 +46,11 @@
                         <td>{{ tarefa.id_tarefa.prazo }}</td>
                         <td>{{ tarefa.id_tarefa.id_professor.nome }} </td>
                         {% if tarefa.visto == 'n' %}
-                            <td><i class="far fa-frown" style="color:red"></i></td>
+                            <td><i class="far fa-frown" style="color:rgb(248, 32, 32)"></i></td>
                         {% elif tarefa.visto == 'f' %}
-                            <td><i class="far fa-smile" style="color:green"></i></td>
+                            <td><i class="far fa-smile" style="color:rgb(17, 218, 17)"></i></td>
                         {% else %}
-                            <td><i class="far fa-meh" style="color:yellow"></i></td>
+                            <td><i class="far fa-meh" style="color:rgb(252, 248, 55)"></i></td>
                         {% endif %}
                     </tr>
                 {% endfor %}
