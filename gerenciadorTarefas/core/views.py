@@ -43,13 +43,30 @@ def area_professor(request):
 
 def turma(request, slug):
 
-    
+    professor = Professor.objects.get(id=3)
     turma = Turma.objects.get(slug=slug)
     alunos_turma = Aluno.objects.filter(id_turma = turma.id)
     alunosAux = []
     dadosAlunos = []
     tarefas = Alunotarefa.objects.all()
+    tarefas_id = []
     tarefas_turma = Tarefa.objects.filter(id_turma = turma.id)
+    tarefas_professor = []
+    tarefasVistas = []
+    tarefasNvistas = []
+
+    for tarefa in tarefas:
+        tarefas_id.append(tarefa.id)
+
+    for tarefa in tarefas_turma:
+        if tarefa.id_professor.id == professor.id:
+            tarefas_professor.append(tarefa)
+
+    for tarefa in tarefas_professor:
+        if tarefa.id in tarefas_id:
+            tarefasVistas.append(tarefa)
+        else:
+            tarefasNvistas.append(tarefa)  
 
     for aluno in alunos_turma:
         tarefas_aluno = Alunotarefa.objects.filter(id_aluno = aluno.id)
@@ -58,12 +75,12 @@ def turma(request, slug):
         incom = 0
 
         for tarefa in tarefas_aluno:
-            if tarefa.visto == 'f':
-                feitas += 1
-            elif tarefa.visto == 'n':
-                nFeitas += 1
-            else:
-                incom += 1
+                if tarefa.visto == 'f':
+                    feitas += 1
+                elif tarefa.visto == 'n':
+                    nFeitas += 1
+                else:
+                    incom += 1
 
         alunosAux.append(AlunoAux(aluno.nome, aluno.numero_chamada, feitas, nFeitas, incom, aluno.slug))
     
@@ -74,7 +91,9 @@ def turma(request, slug):
     context = {
         'alunos':alunosAux,
         'dadosAlunos': dados_tarefa,
-        'turma' : turma
+        'turma' : turma,
+        'tarefasV': tarefasVistas,
+        'tarefasN': tarefasNvistas
     }    
 
     return render(request, "turma.html", context)
@@ -109,7 +128,7 @@ def aluno(request, slug):
 
     return render(request, "aluno.html", context)
 
-def vistar_tarefa(request):
+def tarefa(request, slug):
     if request.is_ajax():
         if request.POST:
             vistos = request.body

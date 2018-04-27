@@ -18,7 +18,7 @@
         <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
         <div class="nav-menu"><ul>
             <li><a href="cadastrar_tarefa.html">Cadastrar tarefa</a></li>
-            <li><a href="{% url 'visto' %}">Vistar tarefa</a></li>
+            <li><a href="#">Vistar tarefa</a></li>
             <li><a href="index.html">Sair</a></li>
         </ul></div>
     </nav>
@@ -39,36 +39,47 @@
         </div>
 
         <div id="menu-tarefas">
+            <h1>Tarefas a vistar:</h1>
             <table class="table table-hover table-tarefa">
                 <thead>
                     <tr>
-                    <th>Data</th>
-                    <th>Prazo</th>
-                    <th>Tipo</th>
-                    <th>Vistado</th>
+                        <th>Data</th>
+                        <th>Prazo</th>
+                        <th>Tipo</th>
+                        <th>Vistado</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="location.href = '#';">
-                    <td>28/04/2018</td>
-                    <td>30/04/2018</td>
-                    <td>Trabalho</td>
-                    <td><i class="fas fa-question-circle" style="color:red"></i></td>
+                    {% for tarefa in tarefasN %}
+                        <tr onclick="location.href = '#';">
+                            <td>{{ tarefa.data }}</td>
+                            <td>{{ tarefa.prazo }}</td>
+                            <td>{{ tarefa.tipo }}</td>
+                            <td><i class="fas fa-question-circle" style="color:red"></i></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h1>Tarefas vistas:</h1>
+            <table class="table table-hover table-tarefa">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Prazo</th>
+                        <th>Tipo</th>
+                        <th>Vistado</th>
                     </tr>
-    
-                    <tr onclick="location.href = '#';">
-                    <td>28/04/2018</td>
-                    <td>30/04/2018</td>
-                    <td>Material</td>
-                    <td><i class="fas fa-check-circle" style="color:aqua"></i></i></td>
-                    </tr>
-    
-                    <tr onclick="location.href = '#';">
-                    <td>28/04/2018</td>
-                    <td>30/04/2018</td>
-                    <td>Lição</td>
-                    <td><i class="fas fa-check-circle" style="color:aqua"></i></i></td>
-                    </tr>
+                </thead>
+                <tbody>
+                    {% for tarefa in tarefasV %}
+                        <tr onclick="location.href = '/tarefa/{{ tarefa.slug }}';">
+                            <td>{{ tarefa.data }}</td>
+                            <td>{{ tarefa.prazo }}</td>
+                            <td>{{ tarefa.tipo }}</td>
+                            <td><i class="fas fa-check-circle" style="color:aqua"></i></i></td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             

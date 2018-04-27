@@ -42,10 +42,11 @@ body {
  }
 
  .menu-admin{
-   margin-left: 5%;
-   margin-right: 5%;
+   margin-left: auto;
+   margin-right: auto;
    margin-top: 10px;
    align-content: center;
+   width: 75%;
  }
 
 .menu-admin a{
@@ -267,18 +268,21 @@ body {
   width: 45%;
   margin-left: auto;
   margin-right: auto;
-  height: 10%;
+  height: 70px;
   background-color: #272323;
   padding: 0;
 }
 
 .btn-opcao-dash{
-  width: 40%;
+  width: 49.59%;
   font-size: 30px;
   margin-left: auto;
   margin-right: auto;
   height: 100%;
   background-color: #272323;
+  border-left: 3px groove #130f0f;
+  border-right: 3px groove #130f0f;
+  border-top: 3px groove #130f0f;
 }
 
 .btn-opcao-dash:hover{
@@ -296,6 +300,19 @@ body {
 .table-tarefa tr:hover td{
   cursor: pointer;
   background-color: #4b5f4c;
+}
+
+#menu-tarefas h1{
+  margin-top: 15px;
+  font-size: 30px;
+}
+
+#menu-tarefas table{
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
  @media (max-width: 768px) {
