@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from core.models import *
+from core.forms import *
 import simplejson, json
+from datetime import date
 
 # Create your views here.
 
@@ -23,6 +25,17 @@ class AlunoAux:
             "naoFeitas": ('%.1f' %nfporcem),
             "incompletas": ('%.1f' %inporcem)
         }
+
+def slug_tarefa(tipo, prazo, id_professor):
+    prazo = str(prazo)
+    idAux = str(id_professor)
+
+    tipoAux = tipo[0]
+    prazoAux = ''.join(prazoLista.split('-'))
+
+    return '{}{}{}'.format(tipoAux, prazoAux, idAux)
+
+
 
 def area_professor(request):
 
@@ -48,12 +61,12 @@ def turma(request, slug):
     alunos_turma = Aluno.objects.filter(id_turma = turma.id)
     alunosAux = []
     dadosAlunos = []
-    tarefas = Alunotarefa.objects.all()
-    tarefas_id = []
-    tarefas_turma = Tarefa.objects.filter(id_turma = turma.id)
-    tarefas_professor = []
-    tarefasVistas = []
-    tarefasNvistas = []
+    tarefas = Alunotarefa.objects.all() #todas as tarefas da tabela AlunoTarefa
+    tarefas_id = [] #id's das tarefas da tabela AlunoTarefa
+    tarefas_turma = Tarefa.objects.filter(id_turma = turma.id) #todas as tarefas desta turma
+    tarefas_professor = [] #todas as tarefas do professor logado
+    tarefasVistas = [] #tarefas já vistadas
+    tarefasNvistas = [] #tarefas ainda não vistadas
 
     for tarefa in tarefas:
         tarefas_id.append(tarefa.id)
@@ -129,9 +142,52 @@ def aluno(request, slug):
     return render(request, "aluno.html", context)
 
 def tarefa(request, slug):
+    tarefa = Tarefa.objects.get(slug=slug)
+    alunos = Alunotarefa.objects.filter(id_tarefa=tarefa)
+    alunosTarefa = []
+
+    '''for aluno in alunos:
+        if aluno.id_turma == tarefa.id_turma:
+            alunosTarefa.append(aluno)'''
+
     if request.is_ajax():
         if request.POST:
             vistos = request.body
+            for aluno in alunos:
+                for visto in vistos:
+                    if visto.numero == aluno.id_aluno.numero_chamada:
+                        status = 'F'
+                        if visto.visto == 'nao fez':
+                            status = 'N'
+                        elif visto.visto == 'incompleto':
+                            status = 'I'
+                        aluno.visto = status
+
+    context = {
+        'alunos': alunos
+    }
             
             
-    return render(request, "vistar_tarefa.html")
+    return render(request, "vistar_tarefa.html", context)
+
+def cadastrar_tarefa(request):
+    today = date.today()
+    today = today.strftime('%d/%m/%Y')
+    if request.POST:
+        form = TarefaForm(request.POST)
+        if form.is_valid():
+            forms = form.save(commit=false)
+            forms.slug = slug_tarefa(forms.tipo, forms.prazo, forms.id_professor.id)
+            forms.data = today
+            forms.save()
+            return redirect('/cadastrar_tarefa')
+
+    else:
+        form = TarefaForm()
+
+    context = {
+        'form':form,
+        'hoje':today
+    }
+
+    return render(request, "cadastrar_tarefa.html", context)

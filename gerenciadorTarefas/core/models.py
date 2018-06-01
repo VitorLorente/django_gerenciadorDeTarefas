@@ -15,6 +15,9 @@ class Professor(models.Model):
     class Meta:
         db_table = 'Professor'
 
+    def __str__(self):
+        return self.nome
+
 class Turma(models.Model):
     turno = models.CharField(max_length=1)
     nivel = models.CharField(max_length=35)
@@ -63,6 +66,9 @@ class Aluno(models.Model):
     id_responsavel = models.ForeignKey('Responsavel', models.DO_NOTHING, db_column='id_responsavel')
     id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma')
     slug = models.SlugField(max_length=20)
+
+    def __str__(self):
+        return '{} - {}'.format(self.ra, self.nome)
 
 
 class Alunotarefa(models.Model):

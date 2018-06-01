@@ -40,14 +40,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr onclick="location.href = '#';">
-                        <td class="tb-numero">1</td>
-                        <td class="tb-nome">Aluno Fulando de Tal 1</td>
-                        <td><input class="check-fez" type="checkbox" name="check-fez"></td>
-                        <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
-                        <td><input class="check-incom" type="checkbox" name="check-incom"></td>
-                    </tr>
-                    <tr onclick="location.href = '#';">
+                    {% for aluno in alunos %}
+                        <tr>
+                            <td class="tb-numero">{{ aluno.id_aluno.numero_chamada }}</td>
+                            <td class="tb-nome">{{ aluno.id_aluno.nome }}</td>
+                            <td><input class="check-fez" type="checkbox" name="check-fez"></td>
+                            <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
+                            <td><input class="check-incom" type="checkbox" name="check-incom"></td>
+                        </tr>
+                    {% endfor %}
+                    <!--<tr onclick="location.href = '#';">
                         <td class="tb-numero">2</td>
                         <td class="tb-nome">Aluno Fulando de Tal 2</td>
                         <td><input class="check-fez" type="checkbox" name="check-fez"></td>
@@ -67,7 +69,7 @@
                         <td><input class="check-fez" type="checkbox" name="check-fez"></td>
                         <td><input class="check-nfez" type="checkbox" name="check-nfez"></td>
                         <td><input class="check-incom" type="checkbox" name="check-incom"></td>
-                    </tr>
+                    </tr>-->
                 </tbody>
             </table>
             <form action='' method="post">
@@ -91,14 +93,13 @@
                 else if($(this).find('.check-incom').is(':checked') == true){
                     visto = "incompleto";
                 }
-                //alert(visto);
                 lista_vistos.push({
                     "numero": $(this).find('.tb-numero').text(),
                     "nome": $(this).find('.tb-nome').text(),
                     "visto": visto
                 });     
             });
-            //$.post('vistar', lista_vistos);
+            
             var csrf = '{{ csrf_token }}'
             $.ajax({
                 type: 'POST',

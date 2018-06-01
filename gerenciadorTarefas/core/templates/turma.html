@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a href="index.html"><i class="fab fa-earlybirds" style="font-size:50px; color:#beb4b5;"></i></a> <h1>Gerenciador de Tarefas</h1>
         <div class="nav-menu"><ul>
-            <li><a href="cadastrar_tarefa.html">Cadastrar tarefa</a></li>
+            <li><a href="/cadastrar_tarefa">Cadastrar tarefa</a></li>
             <li><a href="#">Vistar tarefa</a></li>
             <li><a href="index.html">Sair</a></li>
         </ul></div>
@@ -87,77 +87,77 @@
     </div>
 
    <script> 
-        var options = {
-            layout: {
-                padding : {
-                    left: -42,
-                    right: 42
-                }
-            },
-            legend : {
-                display: false
-            },
-            devicePixelRatio : 1
-        }
-
-        var dados = JSON.parse('{{ dadosAlunos|safe }}')
-        var ctx = []
-
-        for(var i = 0; i < dados.length; i++){
-            ctx.push({
-                "slug": dados[i].slug, 
-                "canvas": document.getElementById(dados[i].slug)
-            })
-        }
-
-        var graficos = []
-
-        for(var i = 0; i < ctx.length; i++){
-            for(var j = 0; j < dados.length; j++){
-                if(ctx[i].slug == dados[j].slug){
-                    graficos.push(new Chart(ctx[i].canvas, {
-                        type: 'pie',
-                        data : {
-                            labels: ["Não fez", "Incompleta", "Feita"],
-                            datasets: [{
-                                data: [dados[j].naoFeitas, dados[j].incompletas, dados[j].feitas],
-                                backgroundColor: [
-                                    'rgba(247, 7, 27, 0.35)',
-                                    'rgba(255, 206, 1, 0.35)',
-                                    'rgba(14, 209, 2, 0.35)'
-                                ],
-                                borderColor: [
-                                    'rgba(157, 180, 204,1)',
-                                    'rgba(157, 180, 204, 1)',
-                                    'rgba(157, 180, 204, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: options
-                    }));
-                    
-                }
-                }
+    var options = {
+        layout: {
+            padding : {
+                left: -42,
+                right: 42
             }
+        },
+        legend : {
+            display: false
+        },
+        devicePixelRatio : 1
+    }
+
+    var dados = JSON.parse('{{ dadosAlunos|safe }}')
+    var ctx = []
+
+    for(var i = 0; i < dados.length; i++){
+        ctx.push({
+            "slug": dados[i].slug, 
+            "canvas": document.getElementById(dados[i].slug)
+        })
+    }
+
+    var graficos = []
+
+    for(var i = 0; i < ctx.length; i++){
+        for(var j = 0; j < dados.length; j++){
+            if(ctx[i].slug == dados[j].slug){
+                graficos.push(new Chart(ctx[i].canvas, {
+                    type: 'pie',
+                    data : {
+                        labels: ["Não fez", "Incompleta", "Feita"],
+                        datasets: [{
+                            data: [dados[j].naoFeitas, dados[j].incompletas, dados[j].feitas],
+                            backgroundColor: [
+                                'rgba(247, 7, 27, 0.35)',
+                                'rgba(255, 206, 1, 0.35)',
+                                'rgba(14, 209, 2, 0.35)'
+                            ],
+                            borderColor: [
+                                'rgba(157, 180, 204,1)',
+                                'rgba(157, 180, 204, 1)',
+                                'rgba(157, 180, 204, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: options
+                }));
+                
+            }
+            }
+        }
+        $('#menu-tarefas').hide();
+        $('#menu-alunos').show();
+        $('#btn-alunos').css("background-color", "#333");
+        $('#btn-tarefas').css("background-color", "#272323");
+
+        $('#btn-alunos').click(function(){
             $('#menu-tarefas').hide();
             $('#menu-alunos').show();
             $('#btn-alunos').css("background-color", "#333");
             $('#btn-tarefas').css("background-color", "#272323");
+        });
 
-            $('#btn-alunos').click(function(){
-                $('#menu-tarefas').hide();
-                $('#menu-alunos').show();
-                $('#btn-alunos').css("background-color", "#333");
-                $('#btn-tarefas').css("background-color", "#272323");
-            });
-
-            $('#btn-tarefas').click(function(){
-                $('#menu-alunos').hide();
-                $('#menu-tarefas').show();
-                $('#btn-tarefas').css("background-color", "#333");
-                $('#btn-alunos').css("background-color", "#272323");
-            });	
-        </script>
+        $('#btn-tarefas').click(function(){
+            $('#menu-alunos').hide();
+            $('#menu-tarefas').show();
+            $('#btn-tarefas').css("background-color", "#333");
+            $('#btn-alunos').css("background-color", "#272323");
+        });	
+    </script>
 </body>
 </html>
